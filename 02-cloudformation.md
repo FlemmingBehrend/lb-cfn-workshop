@@ -4,7 +4,7 @@
 
 ## Hvordan virker CloudFormation
 
-![CloudFormation](https://d1.awsstatic.com/Products/product-name/diagrams/product-page-diagram_CloudFormation.ad3a4c93b4fdd3366da3da0de4fb084d89a5d761.png)
+![CloudFormation](/images/cloudformation-01.png)
 
 ### CloudFormation Template
 
