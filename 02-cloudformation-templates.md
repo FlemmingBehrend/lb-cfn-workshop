@@ -6,9 +6,11 @@ _AWS CloudFormation lets you model, provision, and manage AWS and third-party re
 
 ![CloudFormation](/images/cloudformation-01.png)
 
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html
+
 ## CloudFormation Template
 
-En tempalte kan skrives i enten json eller yaml. Jeg fortrækker yaml.
+En template kan skrives i enten json eller yaml. Jeg fortrækker yaml.
 
 En template er bygget op i sektioner hvor hver sektion har et specifikt formål
 
@@ -283,3 +285,7 @@ Outputs:
 ```
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html
+
+TODO:
+
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html

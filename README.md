@@ -3,7 +3,6 @@
 ## Agenda
 
 1. [Introduktion](01-Introduction.md)
-2. [Hvad er CloudFormation](02-cloudformation.md)
-3. [Hvad skal vi bygge](03-exercise.md)
-
-https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html
+2. [CloudFormation Templates](02-cloudformation-templates.md)
+3. [CloudFormation Stacks](03-cloudformation-stacks.md)
+4. [Hvad skal vi bygge](04-exercise.md)
