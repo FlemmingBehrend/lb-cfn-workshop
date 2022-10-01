@@ -101,7 +101,7 @@ Udover de ovenstående er der nogle flere pseudo parameters som kan bruges i tem
 
 Resources er den eneste sektion i en template som er `Required`. Her defineres alle de resourcer som skal oprettes i stacken.
 
-En resource har altid en type med format `AWS::ProductIdentifier::ResourceType`. F.eks. `AWS::EC2::Instance` eller `AWS::S3::Bucket`.
+En AWS resource har altid en type med format `AWS::ProductIdentifier::ResourceType`. F.eks. `AWS::EC2::Instance` eller `AWS::S3::Bucket`.
 
 Til hver resource type er der en række attributer som kan sættes. Disse attributter er specifikke for hver resource type.
 
@@ -143,6 +143,26 @@ Resources:
         Variables:
           TABLE_NAME: !Ref MyTable
 ```
+
+#### Afhængigheder imellem resourcer
+
+En resource kan have en `DependsOn` attribut som specificerer hvilke andre resourcer den afhænger af.
+
+I eksemplet herunder vil `MyFunction` ikke blive oprettet før `MyTable` er oprettet.
+
+```yaml
+Resources:
+  MyTable:
+    Type: AWS::DynamoDB::Table
+    Properties: ...
+
+  MyFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: MyTable
+    Properties: ...
+```
+
+> Hvis en resource har en reference til en anden resource som ikke er oprettet endnu, så vil CloudFormation vente med at oprette den resource til den anden er oprettet. Det er derfor ikke nødvendigt at specificere `DependsOn` attributen.
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 
