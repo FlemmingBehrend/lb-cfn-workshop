@@ -49,7 +49,7 @@ Example på hvordan vi kan oprette den samme stack som vi lavede igennem konsoll
 aws cloudformation create-stack \
   --stack-name simple-stack-cli \
   --template-body file://./examples/simple-stack.yaml \
-  --parameters ParameterKey=BucketName ParameterValue=simple-bucket-cli
+  --parameters ParameterKey=BucketName,ParameterValue=simple-bucket-cli
 ```
 
 Tjek status på stacken og de resourcer vi har installeret.
