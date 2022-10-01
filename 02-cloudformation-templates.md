@@ -10,7 +10,7 @@ _AWS CloudFormation lets you model, provision, and manage AWS and third-party re
 
 ## CloudFormation Template
 
-En template kan skrives i enten json eller yaml. Jeg fortrækker yaml.
+En template kan skrives i enten JSON eller YAML. Eksempler i denne workshow bliver skrevet i YAML.
 
 En template er bygget op i sektioner hvor hver sektion har et specifikt formål
 
@@ -310,6 +310,46 @@ Outputs:
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html
 
-TODO:
+## Intrinsic functions
 
-https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html
+AWS har udviklet en række funktioner som kan bruges i templaten.
+
+De kan bruges til at hente værdier til templaten som først er tilgængelige når stacken køre eller til at hente værdier fra andre resourcer i stacken, f.eks. værdier fra [Mappings sektionen](#mappings).
+
+Eksempler på intrinsic functions:
+
+Hent arn på lambda function:  
+`!GetAtt MyFunction.Arn`
+
+Hent værdi fra en parameter:  
+`!Ref MyParameter`
+
+Join værdier sammen:  
+`!Join [",", ["a", "b", "c"]]` > Output: a,b,c
+
+Find ud af om en resource eksisterer:  
+`!If [!Condition MyCondition, "true", "false"]`
+
+Hent værdi fra en anden stack:  
+`!ImportValue MyStackOutput`
+
+```yaml
+# Stack A
+Outputs:
+  LambdaArn:
+    Description: "Arn of lambda function used in stack B"
+    Value: !Ref MyFunction.Arn
+    Export:
+      Name: "MyFunctionArn"
+```
+
+I en anden stack vil i så kunne hente værdien fra stack A med følgende:
+
+`!ImportValue MyFunctionArn`
+Vær opmærksom på
+
+- Du kan ikke slette en stak, hvis en anden stak refererer til en af ​​dens output.
+- Du kan ikke ændre eller fjerne en outputværdi, der refereres til af en anden stak.
+- Exported outputværdier kan kun bruges inden for samme region.
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html
