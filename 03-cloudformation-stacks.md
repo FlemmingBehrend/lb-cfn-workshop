@@ -33,7 +33,7 @@ Resources:
 
 Når man opretter en stack igennem konsollen starter man en wizard.
 
-![Stack01](./images/stacks.01.png)
+![Stack01](./images/stacks-01.png)
 
 Lad os prøve at oprette en simpel stack vi laver et Change Set, reviewer det og kører Change Set på kontoen.
 
@@ -115,6 +115,24 @@ Enginen kan opdatere på forskellige måder:
 Når en stack bliver slettet, så sletter CloudFormation enginen alle resourcer som er blevet oprettet i stacken.
 
 En stack kan ikke slettes hvis den har en afhængigheder til en anden stack.
+
+En stack kan beskyttes mod at blive slettet ved et uheld. Dette bliver kaldt `Termination Protection` og kan aktiveres i konsollen under `stack actions` eller via AWS CLI.
+
+```bash
+aws cloudformation update-termination-protection \
+  --stack-name simple-stack-cli \
+  --enable-termination-protection
+```
+
+Man kan se stacks som er slettet igennem konsollen ved at vælge `Deleted`.
+
+![Stack02](./images/stacks-02.png)
+
+eller med AWS CLI
+
+```bash
+aws cloudformation list-stacks --stack-status-filter DELETE_COMPLETE
+```
 
 ## Stack status koder
 
