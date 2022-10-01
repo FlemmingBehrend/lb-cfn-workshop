@@ -168,4 +168,22 @@ Når en stack er kommet i en af disse to tilstande, så kan de ikke opdateres og
 
 Går det helt galt og man ikke kan slette stacks, så må man have fat i AWS support (Det er sket for mig et par gange)
 
-## drift detection?
+## Drift detection
+
+TODO
+
+## Eksisterende AWS resourcer under CloudFormation kontrol
+
+TODO
+
+## StackSets
+
+TODO
+
+## CloudFormation Registry
+
+TODO
+
+## Links
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html
