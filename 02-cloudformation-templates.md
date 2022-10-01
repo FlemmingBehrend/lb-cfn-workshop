@@ -383,3 +383,9 @@ Vær opmærksom på
 I kan læse mere om de forskellige intrinsic functions her:
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html
+
+## Links
+
+Forskellige snippets:
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/CHAP_TemplateQuickRef.html
