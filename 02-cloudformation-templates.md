@@ -99,7 +99,7 @@ Udover de ovenstående er der nogle flere pseudo parameters som kan bruges i tem
 
 ### Parameters
 
-Parameter er inputs til templaten. De kan bruges til at styre hvilke resourcer der skal oprettes og hvordan de skal konfigureres.
+Parameters er inputs til templaten. De kan bruges til at styre hvilke resourcer der skal oprettes og hvordan de skal konfigureres.
 
 ```yaml
 Parameters:
@@ -115,8 +115,6 @@ Parameters:
     Default: 1.0.0
     Description: The version of the application deployed with this stack
 ```
-
-- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html
 
 Input parameterne kan valideres med regulære udtryk.
 
@@ -134,11 +132,13 @@ Parameters:
     Description: The version of the application deployed with this stack
 ```
 
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html
+
 ### Mappings
 
 Mappings er key/value pairs som kan bruges i templaten.
 
-De bliver typisk brugt til at styre hvilke værdier der bruges baseret på pseudo parameters.
+De kan f.eks. benyttes til at styre hvilke værdier der skal bruges i forskellige regioner.
 
 ```yaml
 AWSTemplateFormatVersion: "2010-09-09"
@@ -192,7 +192,7 @@ Resources:
 
 ### Rules
 
-Man kan specificere regler på tværs af ens input parametre.
+Regler kan oprettes så der er afhængigheder på tværs af ens input parametre.
 
 Dette eksempel definere en regel på tværs af input parametrene EnvironmentType og InstanceType.
 
@@ -224,7 +224,9 @@ Rules:
 
 ### Metadata
 
-Metadata er en beskrivelse af templaten og indgår ikke som en resource i stacken. Det vil derfor ikke være muligt at opdatere Metadata i en eksisterende stack uden også at opdatere en resource i stacken.
+Metadata er en beskrivelse af templaten og indgår ikke som en resource i stacken.
+
+Vær opmærksom på at det ikke er muligt at opdatere Metadata uden også at opdatere noget i stacken som aktiverer en stack update.
 
 ```yaml
 Metadata:
@@ -314,7 +316,7 @@ Outputs:
 
 AWS har udviklet en række funktioner som kan bruges i templaten.
 
-De kan bruges til at hente værdier til templaten som først er tilgængelige når stacken køre eller til at hente værdier fra andre resourcer i stacken, f.eks. værdier fra [Mappings sektionen](#mappings).
+De kan bruges til at hente værdier som først er tilgængelige når stacken kører eller til at hente værdier fra andre resourcer i stacken, f.eks. værdier fra [Mappings sektionen](#mappings).
 
 Eksempler på intrinsic functions:
 
@@ -324,11 +326,13 @@ Hent arn på lambda function:
 Hent værdi fra en parameter:  
 `!Ref MyParameter`
 
+I dokumentationen for de forskillge resourcer kan man se hvad `!Ref` refererer til som default.
+For en S3 bucket er det f.eks. Bucket name.
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
+
 Join værdier sammen:  
 `!Join [",", ["a", "b", "c"]]` > Output: a,b,c
-
-Find ud af om en resource eksisterer:  
-`!If [!Condition MyCondition, "true", "false"]`
 
 Hent værdi fra en anden stack:  
 `!ImportValue MyStackOutput`
@@ -351,5 +355,7 @@ Vær opmærksom på
 - Du kan ikke slette en stak, hvis en anden stak refererer til en af ​​dens output.
 - Du kan ikke ændre eller fjerne en outputværdi, der refereres til af en anden stak.
 - Exported outputværdier kan kun bruges inden for samme region.
+
+I kan læse mere om de forskellige intrinsic functions her:
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html
