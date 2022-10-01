@@ -6,7 +6,7 @@ Et Change Set er en liste af ændringer som skal foretages i AWS.
 
 Outputtet af et Change Set er en CloudFormation Stack.
 
-## Forskellige måder at oprette en CloudFormation Stack
+## Stack oprettelse
 
 Vi prøver at kører denne simple template på via følgende måder:
 
@@ -26,6 +26,8 @@ Resources:
     Properties:
       BucketName: !Ref BucketName
 ```
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html
 
 ### AWS Management Console oprettelse (Manuel)
 
@@ -97,7 +99,48 @@ cdk deploy
 
 - https://docs.aws.amazon.com/cdk/v2/guide/home.html
 
-## TEST
+## Stack opdatering
 
-noget omkring stack låsning ved brug af import / export
-drift detection?
+Hvis et Change Set har opdateringer til eksisterende resourcer, så skal CloudFormation enginen finde ud af hvordan den skal opdatere.
+
+Enginen kan opdatere på forskellige måder:
+
+- Ved at opdatere resourcen uden at ændre logical id
+  - Uden at det får indflydelse på den resource som er i brug
+  - Ved at resourcen bliver "interrupted", eks. ved at den bliver stoppet og genstartet
+- Ved at erstatte resourcen med en ny ressource og derefter slette den gamle ressource
+
+## Stack sletning
+
+Når en stack bliver slettet, så sletter CloudFormation enginen alle resourcer som er blevet oprettet i stacken.
+
+En stack kan ikke slettes hvis den har en afhængigheder til en anden stack.
+
+## Stack status koder
+
+CloudFormation enginen har en række status koder som bruges til at se hvor langt en stack er i processen.
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-view-stack-data-resources.html
+
+Jeg vil gennemgå nogle af de vigtigste status koder.
+
+| Status                              | Beskrivelse                                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| CREATE_IN_PROGRESS                  | Stack er i gang med at blive oprettet                                                                         |
+| CREATE_COMPLETE                     | Stack er blevet oprettet                                                                                      |
+| CREATE_FAILED                       | Stack oprettelsen fejlede                                                                                     |
+| ROLLBACK_IN_PROGRESS                | Stack oprettelsen fejlede og CloudFormation enginen forsøger at slette alle resourcer som er blevet oprettet  |
+| ROLLBACK_COMPLETE                   | Stack oprettelsen fejlede og CloudFormation enginen har slettet alle resourcer som er blevet oprettet         |
+| ROLLBACK_FAILED                     | Rollback fejlede                                                                                              |
+| DELETE_IN_PROGRESS                  | Stack er i gang med at blive slettet                                                                          |
+| DELETE_COMPLETE                     | Stack er blevet slettet                                                                                       |
+| DELETE_FAILED                       | Stack sletningen fejlede                                                                                      |
+| UPDATE_IN_PROGRESS                  | Stack er i gang med at blive opdateret                                                                        |
+| UPDATE_COMPLETE                     | Stack er blevet opdateret                                                                                     |
+| UPDATE_COMPLETE_CLEANUP_IN_PROGRESS | Stack er blevet opdateret og CloudFormation enginen er i gang med at slette gamle resourcer                   |
+| UPDATE_COMPLETE_CLEANUP_COMPLETE    | Stack er blevet opdateret og CloudFormation enginen har slettet gamle resourcer                               |
+| UPDATE_ROLLBACK_IN_PROGRESS         | Stack opdateringen fejlede og CloudFormation enginen forsøger at slette alle resourcer som er blevet oprettet |
+| UPDATE_ROLLBACK_COMPLETE            | Stack opdateringen fejlede og CloudFormation enginen har slettet alle resourcer som er blevet oprettet        |
+| UPDATE_ROLLBACK_FAILED              | Update rollback failed                                                                                        |
+
+## drift detection?
