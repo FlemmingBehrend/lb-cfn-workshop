@@ -101,8 +101,6 @@ Udover de ovenstående er der nogle flere pseudo parameters som kan bruges i tem
 
 Parameter er inputs til templaten. De kan bruges til at styre hvilke resourcer der skal oprettes og hvordan de skal konfigureres.
 
-Eksempel:
-
 ```yaml
 Parameters:
   EnvironmentType:
@@ -120,9 +118,27 @@ Parameters:
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html
 
+Input parameterne kan valideres med regulære udtryk.
+
+```yaml
+Parameters:
+  EnvironmentType:
+    Type: String
+    Default: Staging
+    AllowedPattern: "^(Staging|Production)$"
+    Description: The type of the environment
+  Version:
+    Type: String
+    Default: 1.0.0
+    AllowedPattern: "^\d+\.\d+\.\d+$"
+    Description: The version of the application deployed with this stack
+```
+
 ### Mappings
 
-Example:
+Mappings er key/value pairs som kan bruges i templaten.
+
+De bliver typisk brugt til at styre hvilke værdier der bruges baseret på pseudo parameters.
 
 ```yaml
 AWSTemplateFormatVersion: "2010-09-09"
@@ -155,6 +171,10 @@ Resources:
 
 ### Conditions
 
+Man kan styre om resourcer skal oprettes eller ej vha. conditions.
+
+Her vises et simpelt eksempel på en bucket som kun oprettes hvis input parameteren EnvironmentType er sat til `production`
+
 ```yaml
 Conditions:
   CreateProdResources: !Equals
@@ -171,6 +191,10 @@ Resources:
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/conditions-section-structure.html
 
 ### Rules
+
+Man kan specificere regler på tværs af ens input parametre.
+
+Dette eksempel definere en regel på tværs af input parametrene EnvironmentType og InstanceType.
 
 ```yaml
 Rules:
@@ -230,7 +254,7 @@ Transform:
 
 ### Resources
 
-Resources er den vigtigste sektion i templaten. Her defineres alle de resourcer som skal oprettes i stacken.
+Resources er den eneste sektion i en template som er `Required`. Her defineres alle de resourcer som skal oprettes i stacken.
 
 Der er mange forskellige resourcer som kan oprettes i CloudFormation. Se dem her:
 
