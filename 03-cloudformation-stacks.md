@@ -32,6 +32,12 @@ aws cloudformation create-stack \
   --template-body file://./examples/simple-stack.yaml
 ```
 
+Tjek status på stacken og de resourcer vi har installeret.
+
+```bash
+aws cloudformation list-stack-resources --stack-name myteststack
+```
+
 ### AWS SDK
 
 TODO
