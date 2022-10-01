@@ -97,6 +97,55 @@ Udover de ovenstående er der nogle flere pseudo parameters som kan bruges i tem
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html
 
+### Resources
+
+Resources er den eneste sektion i en template som er `Required`. Her defineres alle de resourcer som skal oprettes i stacken.
+
+En resource har altid en type med format `AWS::ProductIdentifier::ResourceType`. F.eks. `AWS::EC2::Instance` eller `AWS::S3::Bucket`.
+
+Til hver resource type er der en række attributer som kan sættes. Disse attributter er specifikke for hver resource type.
+
+Se dem her:
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+
+Eksempel på en bucket, en dynamodb table og en lambda function:
+
+```yaml
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: MyBucket
+  MyTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: MyTable
+      AttributeDefinitions:
+        - AttributeName: "Id"
+          AttributeType: "S"
+  MyFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs12.x
+      Code:
+        ZipFile: |
+          exports.handler = function(event, context) {
+              console.log("REQUEST RECEIVED:\n" + JSON.stringify(event));
+              consle.log(");
+              return {
+                  statusCode: 200,
+                  body: `The table name is: ${process.env.TABLE_NAME}`
+              };
+          }
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref MyTable
+```
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
+
 ### Parameters
 
 Parameters er inputs til templaten. De kan bruges til at styre hvilke resourcer der skal oprettes og hvordan de skal konfigureres.
@@ -253,51 +302,6 @@ Transform:
 ```
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
-
-### Resources
-
-Resources er den eneste sektion i en template som er `Required`. Her defineres alle de resourcer som skal oprettes i stacken.
-
-Der er mange forskellige resourcer som kan oprettes i CloudFormation. Se dem her:
-
-- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
-
-Eksempel på en bucket, en dynamodb table og en lambda function:
-
-```yaml
-Resources:
-  MyBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: MyBucket
-  MyTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: MyTable
-      AttributeDefinitions:
-        - AttributeName: "Id"
-          AttributeType: "S"
-  MyFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      Handler: index.handler
-      Runtime: nodejs12.x
-      Code:
-        ZipFile: |
-          exports.handler = function(event, context) {
-              console.log("REQUEST RECEIVED:\n" + JSON.stringify(event));
-              consle.log(");
-              return {
-                  statusCode: 200,
-                  body: `The table name is: ${process.env.TABLE_NAME}`
-              };
-          }
-      Environment:
-        Variables:
-          TABLE_NAME: !Ref MyTable
-```
-
-- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 
 ### Outputs
 
