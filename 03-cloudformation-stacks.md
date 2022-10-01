@@ -14,7 +14,7 @@ Der er flere måder at oprette en CloudFormation Stack på.
 
 Når man opretter en stack igennem konsollen starter man en wizard.
 
-[Stack01](./images/stacks.01.png)
+![Stack01](./images/stacks.01.png)
 
 Demo: https://eu-west-1.console.aws.amazon.com/cloudformation/home?region=eu-west-1#/
 
