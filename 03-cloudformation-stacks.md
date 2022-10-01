@@ -59,7 +59,19 @@ async function createStack(fileName) {
 
 ### AWS CDK
 
-TODO
+CDK står for Cloud Development Kit og er en måde at lave Infrastructure as Code på.
+
+CDK genererer CloudFormation templates som så deployes til AWS igennem CloudFormations engine.
+
+For at deploye en stack med CDK kan man fra et CDK projekt skrive:
+
+```bash
+cdk deploy
+```
+
+- https://docs.aws.amazon.com/cdk/v2/guide/home.html
+
+## TEST
 
 noget omkring stack låsning ved brug af import / export
 drift detection?
