@@ -8,6 +8,25 @@ Outputtet af et Change Set er en CloudFormation Stack.
 
 ## Forskellige måder at oprette en CloudFormation Stack
 
+Vi proøver at kører denne simple template på via følgende måder:
+
+- Via AWS Console
+- Via AWS CLI
+- Via AWS SDK
+
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Simple stack'
+Parameters:
+  BucketName:
+    Type: String
+Resources:
+  MyBucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: !Ref BucketName
+```
+
 ### AWS Management Console oprettelse (Manuel)
 
 Når man opretter en stack igennem konsollen starter man en wizard.
