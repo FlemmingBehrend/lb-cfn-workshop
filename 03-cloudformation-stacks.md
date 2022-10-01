@@ -129,12 +129,12 @@ Jeg vil gennemgå nogle af de vigtigste status koder.
 | CREATE_IN_PROGRESS                  | Stack er i gang med at blive oprettet                                                                         |
 | CREATE_COMPLETE                     | Stack er blevet oprettet                                                                                      |
 | CREATE_FAILED                       | Stack oprettelsen fejlede                                                                                     |
-| ROLLBACK_IN_PROGRESS                | Stack oprettelsen fejlede og CloudFormation enginen forsøger at slette alle resourcer som er blevet oprettet  |
-| ROLLBACK_COMPLETE                   | Stack oprettelsen fejlede og CloudFormation enginen har slettet alle resourcer som er blevet oprettet         |
-| ROLLBACK_FAILED                     | Rollback fejlede                                                                                              |
+| ROLLBACK_IN_PROGRESS                | Forsøger at slette alle resourcer som er blevet oprettet                                                      |
+| ROLLBACK_COMPLETE                   | CloudFormation engine har slettet alle resourcer som er blevet oprettet                                       |
+| ROLLBACK_FAILED                     | CloudFormation engine kunne ikke rulle tilbage. Se note.                                                      |
 | DELETE_IN_PROGRESS                  | Stack er i gang med at blive slettet                                                                          |
 | DELETE_COMPLETE                     | Stack er blevet slettet                                                                                       |
-| DELETE_FAILED                       | Stack sletningen fejlede                                                                                      |
+| DELETE_FAILED                       | Stack sletningen fejlede. Se note.                                                                            |
 | UPDATE_IN_PROGRESS                  | Stack er i gang med at blive opdateret                                                                        |
 | UPDATE_COMPLETE                     | Stack er blevet opdateret                                                                                     |
 | UPDATE_COMPLETE_CLEANUP_IN_PROGRESS | Stack er blevet opdateret og CloudFormation enginen er i gang med at slette gamle resourcer                   |
@@ -142,5 +142,12 @@ Jeg vil gennemgå nogle af de vigtigste status koder.
 | UPDATE_ROLLBACK_IN_PROGRESS         | Stack opdateringen fejlede og CloudFormation enginen forsøger at slette alle resourcer som er blevet oprettet |
 | UPDATE_ROLLBACK_COMPLETE            | Stack opdateringen fejlede og CloudFormation enginen har slettet alle resourcer som er blevet oprettet        |
 | UPDATE_ROLLBACK_FAILED              | Update rollback failed                                                                                        |
+
+> Udover disse status koder er der nogle koder som bruges ved importering af eksisterende resourcer.
+
+**Note om ROLLBACK_FAILED og DELETE_FAILED**
+Når en stack er kommet i en af disse to tilstande, så kan de ikke opdateres og man er nød til at slette dem igennem konsollen.
+
+Går det helt galt og man ikke kan slette stacks, så må man have fat i AWS support (Det er sket for mig et par gange)
 
 ## drift detection?
