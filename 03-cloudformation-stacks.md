@@ -8,11 +8,11 @@ Outputtet af et Change Set er en CloudFormation Stack.
 
 ## Forskellige måder at oprette en CloudFormation Stack
 
-Vi proøver at kører denne simple template på via følgende måder:
+Vi prøver at kører denne simple template på via følgende måder:
 
-- Via AWS Console
-- Via AWS CLI
-- Via AWS SDK
+- Via AWS Console (Manual)
+- Via AWS CLI (Skriptet)
+- Via AWS SDK (Programatisk)
 
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
@@ -37,7 +37,7 @@ Lad os prøve at oprette en simpel stack vi laver et Change Set, reviewer det og
 
 Demo: https://eu-west-1.console.aws.amazon.com/cloudformation/home?region=eu-west-1#/
 
-### AWS CLI (Scripted)
+### AWS CLI (Skriptet)
 
 AWS CLI er et kommandolinje værktøj til at interagere med AWS.
 
@@ -48,7 +48,7 @@ Example på hvordan vi kan oprette den samme stack som vi lavede igennem konsoll
 ```bash
 aws cloudformation create-stack \
   --stack-name simple-stack-cli \
-  --template-body file://./examples/simple-stack.yaml
+  --template-body file://./examples/simple-stack.yaml \
   --parameters BucketName=simple-bucket-cli
 ```
 
