@@ -30,6 +30,7 @@ Example på hvordan vi kan oprette den samme stack som vi lavede igennem konsoll
 aws cloudformation create-stack \
   --stack-name simple-stack-cli \
   --template-body file://./examples/simple-stack.yaml
+  --parameters BucketName=simple-bucket-cli
 ```
 
 Tjek status på stacken og de resourcer vi har installeret.
@@ -38,7 +39,7 @@ Tjek status på stacken og de resourcer vi har installeret.
 aws cloudformation list-stack-resources --stack-name simple-stack-cli
 ```
 
-### AWS SDK
+### AWS SDK (Programatisk)
 
 Vi kan også bruge et programming sprog til at oprette en stack.
 
@@ -46,10 +47,16 @@ I dette eksempel bruger vi Javascript.
 
 ```javascript
 async function createStack(fileName) {
-  const cfn = new AWS.CloudFormation({ region: "eu-west-1" });
+  const cfn = new AWS.CloudFormation({ region: 'eu-west-1' });
   const params = {
-    StackName: "simple-stack-sdk",
+    StackName: 'simple-stack-sdk',
     TemplateURL: `https://s3-eu-west-1.amazonaws.com/${templateBucket}/${fileName}`,
+    Parameters: [
+      {
+        ParameterKey: 'BucketName',
+        ParameterValue: `simple-stack-sdk-${uuid()}`
+      }
+    ]
   };
   await cfn.createStack(params).promise();
 }
@@ -57,9 +64,9 @@ async function createStack(fileName) {
 
 [Se hele koden her](./examples/create-simple-stack.js)
 
-### AWS CDK
+### AWS CDK (Programatisk)
 
-CDK står for Cloud Development Kit og er en måde at lave Infrastructure as Code på.
+CDK står for Cloud Development Kit og er en måde at lave Infrastructure as Code med et programmeringssprog.
 
 CDK genererer CloudFormation templates som så deployes til AWS igennem CloudFormations engine.
 

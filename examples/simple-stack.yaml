@@ -1,7 +1,10 @@
-AWSTemplateFormatVersion: "2010-09-09"
-Description: "Simple stack"
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Simple stack'
+Parameters:
+  BucketName:
+    Type: String
 Resources:
   MyBucket:
-    Type: "AWS::S3::Bucket"
+    Type: 'AWS::S3::Bucket'
     Properties:
-      BucketName: "lb-cfn-workshop-simple-bucket"
+      BucketName: !Ref BucketName

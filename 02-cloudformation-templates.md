@@ -18,7 +18,7 @@ En template er bygget op i sektioner hvor hver sektion har et specifikt formål
 # -- OPTIONAL --
 # Denne del af en template fortæller hvilken engine som håndtere den
 # Den ændre som i kan se ikke tit, men giver AWS mulighed for at introduksere breaking changes
-AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: '2010-09-09'
 
 # -- OPTIONAL --
 # En beskrivelse af templaten som vises i CloudFormation console UI
@@ -78,14 +78,14 @@ Her er de mest almindelige:
 # Account ID for den AWS account som stacken er oprettet i
 Outputs:
   MyStacksRegion:
-    Value: !Ref "AWS::AccountId"
+    Value: !Ref 'AWS::AccountId'
 ```
 
 ```yaml
 # Region for den AWS region som stacken er oprettet i
 Outputs:
   MyStacksRegion:
-    Value: !Ref "AWS::Region"
+    Value: !Ref 'AWS::Region'
 ```
 
 ```yaml
@@ -122,8 +122,8 @@ Resources:
     Properties:
       TableName: MyTable
       AttributeDefinitions:
-        - AttributeName: "Id"
-          AttributeType: "S"
+        - AttributeName: 'Id'
+          AttributeType: 'S'
   MyFunction:
     Type: AWS::Lambda::Function
     Properties:
@@ -210,7 +210,7 @@ Mappings er key/value pairs som kan bruges i templaten.
 De kan f.eks. benyttes til at styre hvilke værdier der skal bruges i forskellige regioner.
 
 ```yaml
-AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: '2010-09-09'
 Mappings:
   RegionMap:
     us-east-1:
@@ -230,9 +230,9 @@ Mappings:
       HVMG2: ami-0be9df32ae9f92309
 Resources:
   myEC2Instance:
-    Type: "AWS::EC2::Instance"
+    Type: 'AWS::EC2::Instance'
     Properties:
-      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
+      ImageId: !FindInMap [RegionMap, !Ref 'AWS::Region', HVM64]
       InstanceType: m1.small
 ```
 
@@ -251,10 +251,10 @@ Conditions:
     - production
 Resources:
   Bucket:
-    Type: "AWS::S3::Bucket"
+    Type: 'AWS::S3::Bucket'
     Condition: CreateProdResources
     Properties:
-      BucketName: "ProdBucket"
+      BucketName: 'ProdBucket'
 ```
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/conditions-section-structure.html
@@ -273,20 +273,20 @@ Rules:
       - staging
     Assertions:
       - Assert:
-          "Fn::Contains":
+          'Fn::Contains':
             - - a1.medium
             - !Ref InstanceType
-        AssertDescription: "For a test environment, the instance type must be a1.medium"
+        AssertDescription: 'For a test environment, the instance type must be a1.medium'
   prodInstanceType:
     RuleCondition: !Equals
       - !Ref EnvironmentType
       - production
     Assertions:
       - Assert:
-          "Fn::Contains":
+          'Fn::Contains':
             - - a1.large
             - !Ref InstanceType
-        AssertDescription: "For a production environment, the instance type must be a1.large"
+        AssertDescription: 'For a production environment, the instance type must be a1.large'
 ```
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/rules-section-structure.html
@@ -300,9 +300,9 @@ Vær opmærksom på at det ikke er muligt at opdatere Metadata uden også at opd
 ```yaml
 Metadata:
   Instances:
-    Description: "Information about the instances"
+    Description: 'Information about the instances'
   Databases:
-    Description: "Information about the databases"
+    Description: 'Information about the databases'
 ```
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html
@@ -330,7 +330,7 @@ Outputs er en sektion som definerer output fra stacken. Output kan bruges til at
 ```yaml
 Outputs:
   BucketName:
-    Description: "Name of the S3 bucket"
+    Description: 'Name of the S3 bucket'
     Value: !Ref MyBucket
 ```
 
@@ -365,10 +365,10 @@ Hent værdi fra en anden stack:
 # Stack A
 Outputs:
   LambdaArn:
-    Description: "Arn of lambda function used in stack B"
+    Description: 'Arn of lambda function used in stack B'
     Value: !Ref MyFunction.Arn
     Export:
-      Name: "MyFunctionArn"
+      Name: 'MyFunctionArn'
 ```
 
 I en anden stack vil i så kunne hente værdien fra stack A med følgende:
