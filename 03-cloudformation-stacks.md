@@ -122,7 +122,7 @@ CloudFormation enginen har en række status koder som bruges til at se hvor lang
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-view-stack-data-resources.html
 
-Jeg vil gennemgå nogle af de vigtigste status koder.
+Her er en liste over de vigtigste status koder.
 
 | Status                              | Beskrivelse                                                                                                   |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
@@ -145,7 +145,7 @@ Jeg vil gennemgå nogle af de vigtigste status koder.
 
 > Udover disse status koder er der nogle koder som bruges ved importering af eksisterende resourcer.
 
-**Note om ROLLBACK_FAILED og DELETE_FAILED**
+**Note om ROLLBACK_FAILED og DELETE_FAILED**  
 Når en stack er kommet i en af disse to tilstande, så kan de ikke opdateres og man er nød til at slette dem igennem konsollen.
 
 Går det helt galt og man ikke kan slette stacks, så må man have fat i AWS support (Det er sket for mig et par gange)
