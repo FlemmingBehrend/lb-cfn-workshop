@@ -8,19 +8,29 @@ Outputtet af et Change Set er en CloudFormation Stack.
 
 ## Forskellige måder at oprette en CloudFormation Stack
 
-Der er flere måder at oprette en CloudFormation Stack på.
-
-### AWS Management Console
+### AWS Management Console oprettelse (Manuel)
 
 Når man opretter en stack igennem konsollen starter man en wizard.
 
 ![Stack01](./images/stacks.01.png)
 
+Lad os prøve at oprette en simpel stack vi laver et Change Set, reviewer det og kører Change Set på kontoen.
+
 Demo: https://eu-west-1.console.aws.amazon.com/cloudformation/home?region=eu-west-1#/
 
-### AWS CLI
+### AWS CLI (Scripted)
 
-TODO
+AWS CLI er et kommandolinje værktøj til at interagere med AWS.
+
+AWS CLI er et open source projekt og kan downloades fra https://aws.amazon.com/cli/
+
+Example på hvordan vi kan oprette den samme stack som vi lavede igennem konsollen.
+
+```bash
+aws cloudformation create-stack \
+  --stack-name simple-stack-cli \
+  --template-body file://./examples/simple-stack.yaml
+```
 
 ### AWS SDK
 
