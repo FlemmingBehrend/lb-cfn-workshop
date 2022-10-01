@@ -35,7 +35,7 @@ aws cloudformation create-stack \
 Tjek status på stacken og de resourcer vi har installeret.
 
 ```bash
-aws cloudformation list-stack-resources --stack-name myteststack
+aws cloudformation list-stack-resources --stack-name simple-stack-cli
 ```
 
 ### AWS SDK
