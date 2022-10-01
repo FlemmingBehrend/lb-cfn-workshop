@@ -40,7 +40,22 @@ aws cloudformation list-stack-resources --stack-name simple-stack-cli
 
 ### AWS SDK
 
-TODO
+Vi kan også bruge et programming sprog til at oprette en stack.
+
+I dette eksempel bruger vi Javascript.
+
+```javascript
+async function createStack(fileName) {
+  const cfn = new AWS.CloudFormation({ region: "eu-west-1" });
+  const params = {
+    StackName: "simple-stack-sdk",
+    TemplateURL: `https://s3-eu-west-1.amazonaws.com/${templateBucket}/${fileName}`,
+  };
+  await cfn.createStack(params).promise();
+}
+```
+
+[Se hele koden her](./examples/create-simple-stack.js)
 
 ### AWS CDK
 
