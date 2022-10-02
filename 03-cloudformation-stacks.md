@@ -170,11 +170,33 @@ Går det helt galt og man ikke kan slette stacks, så må man have fat i AWS sup
 
 ## Drift detection
 
-TODO
+Selv om resourcer er oprettet med CloudFormation engine, så er det stadig muligt at ændre en oprettet resource manuelt i konsollen hvis man har rettighederne.
+
+Drift detection er funktionalitet som CloudFormation har til at se om konfigurationen for en resource er ændret i forhold til den konfiguration som CloudFormation har.
+
+Det er dog ikke alle resourcer som understøtter drift detection. Listen over resourcer som understøtter drift detection kan findes her: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
 
 ## Eksisterende AWS resourcer under CloudFormation kontrol
 
-TODO
+Hvis man har oprettet resourcer igennem konsollen som man efterfølgende vil have under kontrol af CloudFormation enginen, så kan man importere dem.
+
+![Stack03](./images/stacks-03.png)
+
+Listen for hvilke resourcer som er understøttet for import er den samme liste som den for Drift Detection.
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
+
+Det er muligt at importere eksisterende resourcer i eksisterende stacks eller i nye stacks.
+
+![Stack04](./images/stacks-04.png)
+
+Det virker på den måde at man opretter eller redigere en template og tilføjer de resourcer som er lavet manuelt. Man skal lave dem som en kopi resourcen hvor alle properties er de samme.
+
+Min erfaring er at det er en svær øvelse, vi har prøvet med vores netværkssetup som blev lavet unden automatik. Vi løb ind i problemer med at nogle af resourcerne ikke var understøttet for import.
+
+Det var også svært at finde ud af hvilke properties der var nødvendige for at få resourcen til at fungere.
 
 ## StackSets
 

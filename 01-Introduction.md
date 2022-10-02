@@ -6,7 +6,7 @@ Bosat i Smørum
 
 ## Baggrund
 
-Uddannet elektronikteknikker og Datanom
+Uddannet Elektronikteknikker og Datanom
 
 ## Erfaring
 
