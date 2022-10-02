@@ -228,7 +228,7 @@ Her finder du alle de resourcer som CloudFormation understøtter. Alle de resour
 
 Laver man sine egen resourcer vha. Custom Resource eller Macro'er kan de registreres her og bruges i forskellige stacks på samme måde som man bruger AWS resourcer som AWS::S3::Bucket f.eks.
 
-- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-resource-specification.html
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html
 
 ## Links
 
