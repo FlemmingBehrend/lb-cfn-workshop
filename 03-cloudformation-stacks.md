@@ -224,7 +224,11 @@ Det er vores erfaring at StackSet man kører ud i mange kontoer skal være meget
 
 ## CloudFormation Registry
 
-TODO
+Her finder du alle de resourcer som CloudFormation understøtter. Alle de resourer i bruger fra AWS ligger her.
+
+Laver man sine egen resourcer vha. Custom Resource eller Macro'er kan de registreres her og bruges i forskellige stacks på samme måde som man bruger AWS resourcer som AWS::S3::Bucket f.eks.
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-resource-specification.html
 
 ## Links
 
