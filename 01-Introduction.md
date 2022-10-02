@@ -20,5 +20,5 @@ Har været med fra starten til at opbygge Topdanmarks cloud platform i AWS (ca. 
 
 ## Kontakt mig på
 
-[LinkedIn](www.linkedin.com/in/flemming-behrend-405309a)  
+[LinkedIn](https://www.linkedin.com/in/flemming-behrend-405309a)  
 [Mail](mailto:flemmingjaeger@gmail.com)
