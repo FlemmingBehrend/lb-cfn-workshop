@@ -1,0 +1,28 @@
+{
+  "name": "lb-cfn-workshop",
+  "version": "1.0.0",
+  "description": "## Agenda",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlemmingBehrend/lb-cfn-workshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FlemmingBehrend/lb-cfn-workshop/issues"
+  },
+  "homepage": "https://github.com/FlemmingBehrend/lb-cfn-workshop#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1227.0",
+    "js-yaml": "^4.1.0",
+    "js-yaml-cloudformation-schema": "^1.0.0",
+    "uuid": "^9.0.0"
+  }
+}
