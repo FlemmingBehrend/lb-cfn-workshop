@@ -186,6 +186,16 @@ Hvis man har oprettet resourcer igennem konsollen som man efterfølgende vil hav
 
 Listen for hvilke resourcer som er understøttet for import er den samme liste som den for Drift Detection.
 
+Det er her de sidste CloudFormation status koder kommer ind i billedet.
+
+| Status                      | Beskrivelse                                                  |
+| --------------------------- | ------------------------------------------------------------ |
+| IMPORT_IN_PROGRESS          | CloudFormation enginen er i gang med at importere resourcen  |
+| IMPORT_COMPLETE             | CloudFormation enginen har importeret resourcen              |
+| IMPORT_ROLLBACK_IN_PROGRESS | CloudFormation enginen forsøger at slette resourcen          |
+| IMPORT_ROLLBACK_COMPLETE    | CloudFormation enginen har slettet resourcen                 |
+| IMPORT_ROLLBACK_FAILED      | CloudFormation enginen kunne ikke slette resourcen. Se note. |
+
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
 
 Det er muligt at importere eksisterende resourcer i eksisterende stacks eller i nye stacks.
