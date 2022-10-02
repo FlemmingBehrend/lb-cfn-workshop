@@ -210,7 +210,17 @@ Det var også svært at finde ud af hvilke properties der var nødvendige for at
 
 ## StackSets
 
-TODO
+StackSets er en funktionalitet som gør det muligt at oprette og opdatere flere stacks på en gang.
+
+![Stack05](./images/stacks-05.png)
+
+Vi betnytter dem til at oprette nogle grundlæggende resourcer i alle vores AWS konti. F.eks. en IAM rolle vi kan bruge til at assume administrator rettigheder i andre konti.
+
+StackSets kan køres på dele af AWS organisationen eller på alle konti i organisationen. Det er i denne forbindelse vi benytter StackSets.
+
+Det er vores erfaring at StackSet man kører ud i mange kontoer skal være meget simple (inden afhængigheder imellem stacks). De skal testes grundigt inden de køres ud, da man ikke kan stoppe CloudFormation når den først er gået i gang.
+
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html
 
 ## CloudFormation Registry
 
