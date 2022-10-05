@@ -10,7 +10,7 @@ _AWS CloudFormation lets you model, provision, and manage AWS and third-party re
 
 ## CloudFormation Template
 
-En template kan skrives i enten JSON eller YAML. Eksempler i denne workshow bliver skrevet i YAML.
+En template kan skrives i enten JSON eller YAML. Eksempler i denne workshop bliver skrevet i YAML.
 
 En template er bygget op i sektioner hvor hver sektion har et specifikt formål
 
