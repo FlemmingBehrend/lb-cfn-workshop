@@ -1,14 +1,14 @@
 # CloudFormation Stacks
 
-Når en template er blevet parsed af CloudFormation engine så er output et Change Set.
+Når en template er blevet parsed af CloudFormation engine, så er output et Change Set.
 
-Et Change Set er en liste af ændringer som skal foretages i AWS.
+Et Change Set er en liste af ændringer, som skal foretages i AWS.
 
 Outputtet af et Change Set er en CloudFormation Stack.
 
 ## Stack oprettelse
 
-Vi prøver at kører denne simple template på via følgende måder:
+Vi prøver at køre denne simple template på via følgende måder:
 
 - Via AWS Console (Manual)
 - Via AWS CLI (Skriptet)
@@ -31,11 +31,11 @@ Resources:
 
 ### AWS Management Console oprettelse (Manuel)
 
-Når man opretter en stack igennem konsollen starter man en wizard.
+Når man opretter en stack igennem konsollen, starter man en wizard.
 
 ![Stack01](./images/stacks-01.png)
 
-Lad os prøve at oprette en simpel stack vi laver et Change Set, reviewer det og kører Change Set på kontoen.
+Lad os prøve at oprette en simpel stack; vi laver et Change Set, reviewer det og kører Change Set på kontoen.
 
 Demo: https://eu-west-1.console.aws.amazon.com/cloudformation/home?region=eu-west-1#/
 
@@ -45,7 +45,7 @@ AWS CLI er et kommandolinje værktøj til at interagere med AWS.
 
 AWS CLI er et open source projekt og kan downloades fra https://aws.amazon.com/cli/
 
-Example på hvordan vi kan oprette den samme stack som vi lavede igennem konsollen.
+Eksempel på hvordan vi kan oprette den samme stack, som vi lavede igennem konsollen.
 
 ```bash
 aws cloudformation create-stack \
@@ -54,15 +54,15 @@ aws cloudformation create-stack \
   --parameters ParameterKey=BucketName,ParameterValue=lb-workshow-simple-bucket-cli
 ```
 
-Tjek status på stacken og de resourcer vi har installeret.
+Tjek status på stacken og de ressourcer vi har installeret.
 
 ```bash
 aws cloudformation list-stack-resources --stack-name simple-stack-cli
 ```
 
-### AWS SDK (Programatisk)
+### AWS SDK (Programmatisk)
 
-Vi kan også bruge et programming sprog til at oprette en stack.
+Vi kan også bruge et programmeringssprog til at oprette en stack.
 
 I dette eksempel bruger vi Javascript.
 
@@ -85,11 +85,11 @@ async function createStack(fileName) {
 
 [Se hele koden her](./examples/create-simple-stack.js)
 
-### AWS CDK (Programatisk)
+### AWS CDK (Programmatisk)
 
 CDK står for Cloud Development Kit og er en måde at lave Infrastructure as Code med et programmeringssprog.
 
-CDK genererer CloudFormation templates som så deployes til AWS igennem CloudFormations engine.
+CDK genererer CloudFormation templates, som så deployes til AWS igennem CloudFormations engine.
 
 For at deploye en stack med CDK kan man fra et CDK projekt skrive:
 
@@ -101,7 +101,7 @@ cdk deploy
 
 ## Stack opdatering
 
-Hvis et Change Set har opdateringer til eksisterende resourcer, så skal CloudFormation enginen finde ud af hvordan den skal opdatere.
+Hvis et Change Set har opdateringer til eksisterende resourcer, så skal CloudFormation enginen finde ud af, hvordan den skal opdatere dem.
 
 Enginen kan opdatere på forskellige måder:
 
@@ -112,9 +112,9 @@ Enginen kan opdatere på forskellige måder:
 
 ## Stack sletning
 
-Når en stack bliver slettet, så sletter CloudFormation enginen alle resourcer som er blevet oprettet i stacken.
+Når en stack bliver slettet, så sletter CloudFormation enginen alle resourcer, som er blevet oprettet i stacken.
 
-En stack kan ikke slettes hvis den har en afhængigheder til en anden stack.
+En stack kan ikke slettes, hvis den har en afhængigheder til en anden stack.
 
 En stack kan beskyttes mod at blive slettet ved et uheld. Dette bliver kaldt `Termination Protection` og kan aktiveres i konsollen under `stack actions` eller via AWS CLI.
 
@@ -124,7 +124,7 @@ aws cloudformation update-termination-protection \
   --enable-termination-protection
 ```
 
-Man kan se stacks som er slettet igennem konsollen ved at vælge `Deleted`.
+Man kan se stacks, som er slettet igennem konsollen, ved at vælge `Deleted`.
 
 ![Stack02](./images/stacks-02.png)
 
@@ -136,7 +136,7 @@ aws cloudformation list-stacks --stack-status-filter DELETE_COMPLETE
 
 ## Stack status koder
 
-CloudFormation enginen har en række status koder som bruges til at se hvor langt en stack er i processen.
+CloudFormation enginen har en række status koder, som bruges til at se, hvor langt en stack er i processen.
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-view-stack-data-resources.html
 
@@ -161,30 +161,30 @@ Her er en liste over de vigtigste status koder.
 | UPDATE_ROLLBACK_COMPLETE            | Stack opdateringen fejlede og CloudFormation enginen har slettet alle resourcer som er blevet oprettet        |
 | UPDATE_ROLLBACK_FAILED              | Update rollback failed                                                                                        |
 
-> Udover disse status koder er der nogle koder som bruges ved importering af eksisterende resourcer.
+> Udover disse status koder er der nogle koder, som bruges ved importering af eksisterende resourcer.
 
 **Note om ROLLBACK_FAILED og DELETE_FAILED**  
-Når en stack er kommet i en af disse to tilstande, så kan de ikke opdateres og man er nød til at slette dem igennem konsollen.
+Når en stack er kommet i en af disse to tilstande, så kan de ikke opdateres, og man er nødt til at slette dem igennem konsollen.
 
 Går det helt galt og man ikke kan slette stacks, så må man have fat i AWS support (Det er sket for mig et par gange)
 
 ## Drift detection
 
-Selv om resourcer er oprettet med CloudFormation engine, så er det stadig muligt at ændre en oprettet resource manuelt i konsollen hvis man har rettighederne.
+Selv om resourcer er oprettet med CloudFormation engine, så er det stadig muligt at ændre en oprettet resource manuelt i konsollen, hvis man har rettighederne.
 
-Drift detection er funktionalitet som CloudFormation har til at se om konfigurationen for en resource er ændret i forhold til den konfiguration som CloudFormation har.
+Drift detection er funktionalitet, som CloudFormation har til at se, om konfigurationen for en resource er ændret i forhold til den konfiguration, som CloudFormation har.
 
-Det er dog ikke alle resourcer som understøtter drift detection. Listen over resourcer som understøtter drift detection kan findes her: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
+Det er dog ikke alle resourcer, som understøtter drift detection. Listen over resourcer, som understøtter drift detection kan findes her: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
 
-## Eksisterende AWS resourcer under CloudFormation kontrol
+## Eksisterende AWS ressourcer under CloudFormation kontrol
 
-Hvis man har oprettet resourcer igennem konsollen som man efterfølgende vil have under kontrol af CloudFormation enginen, så kan man importere dem.
+Hvis man har oprettet ressourcer igennem konsollen, som man efterfølgende vil have under kontrol af CloudFormation enginen, så kan man importere dem.
 
 ![Stack03](./images/stacks-03.png)
 
-Listen for hvilke resourcer som er understøttet for import er den samme liste som den for Drift Detection.
+Listen for hvilke resourcer, som er understøttet for import, er den samme liste som den for Drift Detection.
 
 Det er her de sidste CloudFormation status koder kommer ind i billedet.
 
