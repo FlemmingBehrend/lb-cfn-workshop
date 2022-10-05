@@ -16,25 +16,25 @@ En template er bygget op i sektioner hvor hver sektion har et specifikt formål
 
 ```yaml
 # -- OPTIONAL --
-# Denne del af en template fortæller hvilken engine som håndtere den
-# Den ændre som i kan se ikke tit, men giver AWS mulighed for at introduksere breaking changes
+# Denne del af en template fortæller, hvilken engine som håndterer den
+# Den ændres, som I kan se, ikke tit, men giver AWS mulighed for at introducere breaking changes
 AWSTemplateFormatVersion: '2010-09-09'
 
 # -- OPTIONAL --
-# En beskrivelse af templaten som vises i CloudFormation console UI
+# En beskrivelse af templaten, som vises i CloudFormation console UI
 Description: String
 
 # -- OPTIONAL --
-# Specificere de inputs som CloudFormation templaten
+# Specificerer de inputs, som CloudFormation templaten benytter
 Parameters: set of parameters
 
 # -- OPTIONAL --
-# Kan bruges til at lave key/value pairs som kan bruges i andre sektioner
+# Kan bruges til at lave key/value pairs, som kan bruges i andre sektioner
 Mappings: set of mappings
 
 # -- OPTIONAL --
-# Her kan du lave betingelser som kan definere om andre dele af templaten skal køre.
-# Man bruger navnet på betingelsen i "Condition" attributen i en resource.
+# Her kan du lave betingelser, som kan definere om andre dele af templaten skal køre.
+# Man bruger navnet på betingelsen i "Condition" attributten i en resource.
 Conditions: set of conditions
 
 # -- OPTIONAL --
@@ -46,22 +46,22 @@ Conditions: set of conditions
 Rules: set of rules
 
 # -- OPTIONAL --
-# Metadata for templaten. Benyttes typisk til værktøjer som genererer CloudFormation templates
+# Metadata for templaten. Benyttes typisk til værktøjer, som genererer CloudFormation templates
 # som f.eks. AWS CDK eller CloudFormation Designer UI
 Metadata: template metadata
 
 # -- OPTIONAL --
-# Man kan skrive sine egne CloudFormation macro'er som kan behandle templaten.
-# De specificeres her og køres i den rækkefølge som de er specificeret.
+# Man kan skrive sine egne CloudFormation macro'er, som kan behandle templaten.
+# De specificeres her og køres i den rækkefølge, som de er specificeret.
 Transform: set of transforms
 
 # -- REQUIRED --
-# Her specificeres de resourcer som skal oprettes
-# Dette er den eneste sektion som er required
+# Her specificeres de resourcer, som skal oprettes
+# Dette er den eneste sektion, som er required
 Resources: set of resources
 
 # -- OPTIONAL --
-# CloudFormation stacks kan have outputs som kan bruges af andre stacks
+# CloudFormation stacks kan have outputs, som kan bruges af andre stacks
 # eller til at eksponere data fra stacken
 Outputs: set of outputs
 ```
@@ -70,7 +70,7 @@ Outputs: set of outputs
 
 ### Pseudo parameters
 
-CloudFormation tilbyder en række pseudo parameters som kan bruges i templaten.
+CloudFormation tilbyder en række pseudo parameters, som kan bruges i templaten.
 
 Her er de mest almindelige:
 
@@ -93,17 +93,17 @@ Outputs:
 AWS::NoValue
 ```
 
-Udover de ovenstående er der nogle flere pseudo parameters som kan bruges i templaten. Se dem her:
+Udover de ovenstående er der nogle flere pseudo parameters, som kan bruges i templaten. Se dem her:
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html
 
 ### Resources
 
-Resources er den eneste sektion i en template som er `Required`. Her defineres alle de resourcer som skal oprettes i stacken.
+Resources er den eneste sektion i en template, som er `Required`. Her defineres alle de resourcer, som skal oprettes i stacken.
 
 En AWS resource har altid en type med format `AWS::ProductIdentifier::ResourceType`. F.eks. `AWS::EC2::Instance` eller `AWS::S3::Bucket`.
 
-Til hver resource type er der en række attributer som kan sættes. Disse attributter er specifikke for hver resource type.
+Til hver resource type er der en række attributer, som kan sættes. Disse attributter er specifikke for hver resource type.
 
 Se dem her:
 
@@ -144,11 +144,11 @@ Resources:
           TABLE_NAME: !Ref MyTable
 ```
 
-#### Afhængigheder imellem resourcer
+#### Afhængigheder mellem resourcer
 
-En resource kan have en `DependsOn` attribut som specificerer hvilke andre resourcer den afhænger af.
+En resource kan have en `DependsOn` attribut, som specificerer hvilke andre resourcer, den afhænger af.
 
-I eksemplet herunder vil `MyFunction` ikke blive oprettet før `MyTable` er oprettet.
+I eksemplet herunder vil `MyFunction` ikke blive oprettet, før `MyTable` er oprettet.
 
 ```yaml
 Resources:
@@ -162,13 +162,13 @@ Resources:
     Properties: ...
 ```
 
-> Hvis en resource har en reference til en anden resource som ikke er oprettet endnu, så vil CloudFormation vente med at oprette den resource til den anden er oprettet. Det er derfor ikke nødvendigt at specificere `DependsOn` attributen.
+> Hvis en resource har en reference til en anden resource, som ikke er oprettet endnu, så vil CloudFormation vente med at oprette den resource, til den anden er oprettet. Det er derfor ikke nødvendigt at specificere `DependsOn` attributen.
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 
 ### Parameters
 
-Parameters er inputs til templaten. De kan bruges til at styre hvilke resourcer der skal oprettes og hvordan de skal konfigureres.
+Parameters er inputs til templaten. De kan bruges til at styre hvilke resourcer, der skal oprettes, og hvordan de skal konfigureres.
 
 ```yaml
 Parameters:
@@ -205,9 +205,9 @@ Parameters:
 
 ### Mappings
 
-Mappings er key/value pairs som kan bruges i templaten.
+Mappings er key/value pairs, som kan bruges i templaten.
 
-De kan f.eks. benyttes til at styre hvilke værdier der skal bruges i forskellige regioner.
+De kan f.eks. benyttes til at styre hvilke værdier, der skal bruges i forskellige regioner.
 
 ```yaml
 AWSTemplateFormatVersion: '2010-09-09'
@@ -240,9 +240,9 @@ Resources:
 
 ### Conditions
 
-Man kan styre om resourcer skal oprettes eller ej vha. conditions.
+Man kan styre, om resourcer skal oprettes eller ej, vha. conditions.
 
-Her vises et simpelt eksempel på en bucket som kun oprettes hvis input parameteren EnvironmentType er sat til `production`
+Her vises et simpelt eksempel på en bucket, som kun oprettes, hvis input parameteren EnvironmentType er sat til `production`
 
 ```yaml
 Conditions:
@@ -261,9 +261,9 @@ Resources:
 
 ### Rules
 
-Regler kan oprettes så der er afhængigheder på tværs af ens input parametre.
+Regler kan oprettes, så der er afhængigheder på tværs af ens input parametre.
 
-Dette eksempel definere en regel på tværs af input parametrene EnvironmentType og InstanceType.
+Dette eksempel definerer en regel på tværs af input parametrene EnvironmentType og InstanceType.
 
 ```yaml
 Rules:
@@ -295,7 +295,7 @@ Rules:
 
 Metadata er en beskrivelse af templaten og indgår ikke som en resource i stacken.
 
-Vær opmærksom på at det ikke er muligt at opdatere Metadata uden også at opdatere noget i stacken som aktiverer en stack update.
+Vær opmærksom på, at det ikke er muligt at opdatere Metadata uden også at opdatere noget i stacken, som aktiverer en stack update.
 
 ```yaml
 Metadata:
@@ -309,9 +309,9 @@ Metadata:
 
 ### Transform
 
-Transform er en sektion som beskriver de transformationer som templaten går igennem. Man kan skrive macro'er som defineres her i transform sektionen.
+Transform er en sektion, som beskriver de transformationer, som templaten går igennem. Man kan skrive macro'er, som defineres her i transform sektionen.
 
-En macro er en lambda funktion som behandler en del af templaten og returnere output som bruges i change settet.
+En macro er en lambda funktion, som behandler en del af templaten og returnerer output, som bruges i change settet.
 
 ![cloudformation_macro](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/template-macro-use.png)
 
@@ -325,7 +325,7 @@ Transform:
 
 ### Outputs
 
-Outputs er en sektion som definerer output fra stacken. Output kan bruges til at referere til resourcer i andre stacks eller til at eksponere værdier fra stacken.
+Outputs er en sektion, som definerer output fra stacken. Output kan bruges til at referere til resourcer i andre stacks eller til at eksponere værdier fra stacken.
 
 ```yaml
 Outputs:
@@ -338,9 +338,9 @@ Outputs:
 
 ## Intrinsic functions
 
-AWS har udviklet en række funktioner som kan bruges i templaten.
+AWS har udviklet en række funktioner, som kan bruges i templaten.
 
-De kan bruges til at hente værdier som først er tilgængelige når stacken kører eller til at hente værdier fra andre resourcer i stacken, f.eks. værdier fra [Mappings sektionen](#mappings).
+De kan bruges til at hente værdier, som først er tilgængelige, når stacken kører, eller til at hente værdier fra andre resourcer i stacken, f.eks. værdier fra [Mappings sektionen](#mappings).
 
 Eksempler på intrinsic functions:
 
@@ -350,7 +350,7 @@ Hent arn på lambda function:
 Hent værdi fra en parameter:  
 `!Ref MyParameter`
 
-I dokumentationen for de forskillge resourcer kan man se hvad `!Ref` refererer til som default.
+I dokumentationen for de forskillge resourcer kan man se, hvad `!Ref` refererer til som default.
 For en S3 bucket er det f.eks. Bucket name.
 
 - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html
@@ -371,7 +371,7 @@ Outputs:
       Name: 'MyFunctionArn'
 ```
 
-I en anden stack vil i så kunne hente værdien fra stack A med følgende:
+I en anden stack vil I så kunne hente værdien fra stack A med følgende:
 
 `!ImportValue MyFunctionArn`
 Vær opmærksom på
