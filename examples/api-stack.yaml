@@ -1,23 +1,6 @@
 Description: Http api
 Resources:
-  Api:
-    Type: 'AWS::ApiGatewayV2::Api'
-    Properties:
-      Description: Test api
-      Name: MyTestApi
-      ProtocolType: HTTP
-
-  DefaultStage:
-    Type: 'AWS::ApiGatewayV2::Stage'
-    Properties:
-      ApiId: !Ref Api
-      StageName: $default
-      AccessLogSettings:
-        DestinationArn: !GetAtt LogGroup.Arn
-        Format: >-
-          {"requestTime":"$context.requestTime","responseLength":"$context.responseLength","requestId":"$context.requestId","sourceIp":"$context.identity.sourceIp","httpMethod":"$context.httpMethod","path":"$context.path","status":"$context.status","protocol":"$context.protocol","integrationStatus":"$context.integrationStatus","integrationError":"$context.integration.error","integrationErrorMessage":"$context.integrationErrorMessage"}
-      AutoDeploy: true
-
+  # CloudWatch log group resources for the access logs
   LogGroup:
     Type: 'AWS::Logs::LogGroup'
     Properties:
@@ -36,6 +19,25 @@ Resources:
           - '"}],"Version":"2012-10-17"}'
       PolicyName: ApiAccessLogGroupPolicyTestApi
 
+  # API Gateway resources
+  Api:
+    Type: 'AWS::ApiGatewayV2::Api'
+    Properties:
+      Description: Test api
+      Name: MyTestApi
+      ProtocolType: HTTP
+
+  DefaultStage:
+    Type: 'AWS::ApiGatewayV2::Stage'
+    Properties:
+      ApiId: !Ref Api
+      StageName: $default
+      AccessLogSettings:
+        DestinationArn: !GetAtt LogGroup.Arn
+        Format: >-
+          {"requestTime":"$context.requestTime","responseLength":"$context.responseLength","requestId":"$context.requestId","sourceIp":"$context.identity.sourceIp","httpMethod":"$context.httpMethod","path":"$context.path","status":"$context.status","protocol":"$context.protocol","integrationStatus":"$context.integrationStatus","integrationError":"$context.integration.error","integrationErrorMessage":"$context.integrationErrorMessage"}
+      AutoDeploy: true
+
   Integration:
     Type: 'AWS::ApiGatewayV2::Integration'
     Properties:
@@ -44,13 +46,6 @@ Resources:
       IntegrationUri: !GetAtt Lambda.Arn
       IntegrationMethod: POST
       PayloadFormatVersion: '2.0'
-
-  LambdaPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      Action: lambda:InvokeFunction
-      FunctionName: !GetAtt Lambda.Arn
-      Principal: apigateway.amazonaws.com
 
   Route:
     Type: 'AWS::ApiGatewayV2::Route'
@@ -62,22 +57,7 @@ Resources:
         - - integrations
           - !Ref Integration
 
-  LambdaRole:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      AssumeRolePolicyDocument:
-        Statement:
-          - Action: 'sts:AssumeRole'
-            Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-      ManagedPolicyArns:
-        - !Join
-          - ''
-          - - 'arn:'
-            - !Ref 'AWS::Partition'
-            - ':iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
-
+  # Lambda function resources
   Lambda:
     Type: 'AWS::Lambda::Function'
     Properties:
@@ -97,3 +77,26 @@ Resources:
       Runtime: nodejs14.x
     DependsOn:
       - LambdaRole
+
+  LambdaRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+      ManagedPolicyArns:
+        - !Join
+          - ''
+          - - 'arn:'
+            - !Ref 'AWS::Partition'
+            - ':iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
+
+  LambdaPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt Lambda.Arn
+      Principal: apigateway.amazonaws.com
