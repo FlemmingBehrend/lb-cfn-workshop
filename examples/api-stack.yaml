@@ -45,7 +45,7 @@ Resources:
       IntegrationMethod: POST
       PayloadFormatVersion: '2.0'
 
-  ApiGatewayInvokePermissionForRetrieveBooks:
+  LambdaPermission:
     Type: AWS::Lambda::Permission
     Properties:
       Action: lambda:InvokeFunction
